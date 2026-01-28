@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang="en" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>spark配置 | 七斗的猫猫海洋</title><link rel="icon" type="image/x-icon" href="/qdblog/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/qdblog/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/qdblog/font/BenderLight.woff2"><link rel="preload" as="font" crossorigin="anonymous" href="/qdblog/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/qdblog/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/qdblog/font/Bender.ttf"), url("/qdblog/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/qdblog/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/qdblog/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><meta name="page-config" content="{&quot;code_fold&quot;:null}"><script class="pjax-js">var config = {"root":"/qdblog/","code_fold":15,"search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"数据检索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}};
+var page_config = {
+  code_fold: null
+};
+function updatePageConfig() {
+  var newPageConfig = document.querySelector('meta[name="page-config"]');
+  if (newPageConfig) {
+    page_config = JSON.parse(newPageConfig.content);
+  }
+}
+document.addEventListener('pjax:complete', function() { updatePageConfig(); });
+updatePageConfig();</script><link type="text/css" rel="stylesheet" href="/qdblog/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/qdblog/lib/fontawesome/css/all.min.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/qdblog/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/qdblog/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/qdblog/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/qdblog/js/arknights.js"></script><script defer src="/qdblog/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/qdblog/lib/encrypt/hbe.js"></script><script async src="/qdblog/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.vercount','meta[name=page-config]'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+const postBg = document.querySelector('#post-bg');
+if (postBg) lightGallery(postBg, {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.vercount','meta[name=page-config]'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="数据检索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/qdblog/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/qdblog/archives/"><span class="navItemTitle">Archives</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>spark配置</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2026-01-28T15:54:33.221Z" id="date"> 2026-01-28</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2026-01-28T15:58:28.771Z" id="updated"> 2026-01-28</time></div></span></div></div><hr><div id="post-content"><p><strong>将所有指向其他节点（如 node01, node02）的操作都指向本机 (localhost)，并简化分发和多节点启动的步骤。</strong></p>
+<h3 id="1-前提条件"><a href="#1-前提条件" class="headerlink" title="1. 前提条件"></a><strong>1. 前提条件</strong></h3><p>这一步与教程一致。请确保您的伪分布式Hadoop集群（HDFS和YARN）能够正常运行。</p>
+<ul>
+<li>Hadoop已正确配置。</li>
+<li>Java环境已就绪（推荐JDK 8）。</li>
+</ul>
+<h3 id="2-下载并解压-Spark"><a href="#2-下载并解压-Spark" class="headerlink" title="2. 下载并解压 Spark"></a><strong>2. 下载并解压 Spark</strong></h3><p>这一步也完全相同。您可以按照教程中的说明下载、上传并解压Spark。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 假设您已将安装包上传到 /root/ 目录</span><br><span class="hljs-comment"># 解压到指定目录</span><br>tar -zxvf spark-3.3.4-bin-hadoop3.tgz -C /opt/<br><br><span class="hljs-comment"># 创建软链接便于管理</span><br><span class="hljs-built_in">ln</span> -s /opt/spark-3.3.4-bin-hadoop3 /opt/spark<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-配置环境变量"><a href="#3-配置环境变量" class="headerlink" title="3. 配置环境变量"></a><strong>3. 配置环境变量</strong></h3><p>这一步的配置内容<strong>完全一样</strong>。因为Spark需要知道Hadoop的配置文件在哪里。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 编辑配置文件</span><br>vim /etc/profile<br></code></pre></td></tr></table></figure>
+
+<p>在文件末尾添加：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> SPARK_HOME=/opt/spark<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$SPARK_HOME</span>/bin:<span class="hljs-variable">$SPARK_HOME</span>/sbin<br><span class="hljs-built_in">export</span> HADOOP_CONF_DIR=<span class="hljs-variable">$HADOOP_HOME</span>/etc/hadoop<br></code></pre></td></tr></table></figure>
+
+<p>使配置生效：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> /etc/profile<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-配置-Spark"><a href="#4-配置-Spark" class="headerlink" title="4. 配置 Spark"></a><strong>4. 配置 Spark</strong></h3><p>这是需要修改的<strong>关键步骤之一</strong>。</p>
+<p>进入Spark配置目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> <span class="hljs-variable">$SPARK_HOME</span>/conf<br></code></pre></td></tr></table></figure>
+
+<p>复制模板文件（这步和教程一样）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> spark-env.sh.template spark-env.sh<br><span class="hljs-built_in">cp</span> workers.template workers<br></code></pre></td></tr></table></figure>
+
+<p><strong>修改 <code>spark-env.sh</code> 文件：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim spark-env.sh<br></code></pre></td></tr></table></figure>
+<p>主要修改 <code>SPARK_MASTER_HOST</code> 为您虚拟机的IP地址或者直接使用 <code>localhost</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Java路径 (请根据您的实际路径填写)</span><br><span class="hljs-built_in">export</span> JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64<br><br><span class="hljs-comment"># Hadoop配置文件路径 (通常无需修改)</span><br><span class="hljs-built_in">export</span> HADOOP_CONF_DIR=<span class="hljs-variable">$HADOOP_HOME</span>/etc/hadoop<br><br><span class="hljs-comment"># 【修改点】Spark主节点地址，改为localhost或者您虚拟机的IP</span><br><span class="hljs-built_in">export</span> SPARK_MASTER_HOST=localhost<br><br><span class="hljs-comment"># 【修改点】根据您虚拟机的配置调整内存和CPU核心数</span><br><span class="hljs-comment"># 例如，如果您的虚拟机总共有8G内存，4个核心，可以这样分配</span><br><span class="hljs-built_in">export</span> SPARK_WORKER_MEMORY=4g<br><span class="hljs-built_in">export</span> SPARK_WORKER_CORES=2<br><br><span class="hljs-comment"># Spark历史服务器配置 (这部分和教程一样)</span><br><span class="hljs-built_in">export</span> SPARK_HISTORY_OPTS=<span class="hljs-string">&quot;-Dspark.history.fs.logDirectory=hdfs:///user/spark/applicationHistory -Dspark.history.retainedApplications=30&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="5-配置-workers-文件"><a href="#5-配置-workers-文件" class="headerlink" title="5. 配置 workers 文件"></a><strong>5. 配置 workers 文件</strong></h3><p>这是另一个<strong>关键修改点</strong>。在伪分布式环境中，Master节点同时也是Worker节点。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim workers<br></code></pre></td></tr></table></figure>
+<p>将文件中的所有内容<strong>删除</strong>，只保留一行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">localhost<br></code></pre></td></tr></table></figure>
+
+<h3 id="6-配置-Spark-与-YARN-集成"><a href="#6-配置-Spark-与-YARN-集成" class="headerlink" title="6. 配置 Spark 与 YARN 集成"></a><strong>6. 配置 Spark 与 YARN 集成</strong></h3><p>这一步是为了让Spark程序能运行在YARN上，对于伪分布式环境同样适用。</p>
+<p>创建 <code>spark-defaults.conf</code> 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> spark-defaults.conf.template spark-defaults.conf<br></code></pre></td></tr></table></figure>
+
+<p>编辑 <code>spark-defaults.conf</code> 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim spark-defaults.conf<br></code></pre></td></tr></table></figure>
+<p>添加以下内容，<strong>注意修改IP地址为您虚拟机的IP或 <code>localhost</code></strong>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 【关键配置】指定Spark应用默认运行在YARN模式下</span><br>spark.master                     yarn<br><br><span class="hljs-comment"># 以下配置用于开启日志聚合，方便通过历史服务器查看应用运行情况</span><br>spark.eventLog.enabled           <span class="hljs-literal">true</span><br>spark.eventLog.<span class="hljs-built_in">dir</span>               hdfs:///user/spark/applicationHistory<br>spark.yarn.historyServer.address localhost:18080 <span class="hljs-comment"># 【修改点】使用localhost或您的IP</span><br><br><span class="hljs-comment"># 【可选优化】指定Spark的jar包在HDFS中的位置，避免每次提交任务都上传</span><br>spark.yarn.jars                  hdfs:///user/spark/jars/*.jar<br></code></pre></td></tr></table></figure>
+
+<h3 id="7-分发-Spark-到所有节点"><a href="#7-分发-Spark-到所有节点" class="headerlink" title="7. 分发 Spark 到所有节点"></a><strong>7. 分发 Spark 到所有节点</strong></h3><p>在伪分布式环境中，<strong>此步骤完全不需要</strong>，因为您只有一个节点。</p>
+<h3 id="8-准备-HDFS-目录"><a href="#8-准备-HDFS-目录" class="headerlink" title="8. 准备 HDFS 目录"></a><strong>8. 准备 HDFS 目录</strong></h3><p>这一步与教程<strong>完全相同</strong>，目的是在HDFS上创建Spark运行所必需的目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 启动您的HDFS (如果尚未启动)</span><br><span class="hljs-comment"># start-dfs.sh</span><br><br><span class="hljs-comment"># 创建Spark需要的HDFS目录</span><br>hdfs dfs -<span class="hljs-built_in">mkdir</span> -p /user/spark/applicationHistory<br>hdfs dfs -<span class="hljs-built_in">mkdir</span> -p /user/spark/jars<br><br><span class="hljs-comment"># 复制Spark的jar包到HDFS</span><br>hdfs dfs -put <span class="hljs-variable">$SPARK_HOME</span>/jars/* /user/spark/jars/<br></code></pre></td></tr></table></figure>
+
+<h3 id="9-启动-Spark-集群"><a href="#9-启动-Spark-集群" class="headerlink" title="9. 启动 Spark 集群"></a><strong>9. 启动 Spark 集群</strong></h3><p>教程中的启动命令有些混杂，这里为您梳理一下伪分布式环境下的正确启动方式。</p>
+<p><strong>方式一：启动Spark独立集群（Standalone模式）</strong><br>如果您想先体验Spark自身的集群模式，可以这样启动。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 该脚本会根据workers文件启动Master和Worker</span><br><span class="hljs-variable">$SPARK_HOME</span>/sbin/start-all.sh<br></code></pre></td></tr></table></figure>
+
+<p><strong>方式二：不启动Spark独立集群，直接使用YARN</strong><br>由于我们在第6步 <code>spark-defaults.conf</code> 中已经指定了 <code>spark.master</code> 为 <code>yarn</code>，因此我们<strong>无需启动Spark的Master和Worker进程</strong> (<code>start-all.sh</code>)。我们只需要保证Hadoop的YARN是启动的即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 确保YARN已启动</span><br><span class="hljs-comment"># start-yarn.sh</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>启动历史服务器（两种方式下都需要）：</strong><br>这个服务是独立的，用于查看已完成的Spark应用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-variable">$SPARK_HOME</span>/sbin/start-history-server.sh<br></code></pre></td></tr></table></figure>
+
+<h3 id="10-查看Spark进程"><a href="#10-查看Spark进程" class="headerlink" title="10. 查看Spark进程"></a><strong>10. 查看Spark进程</strong></h3><p>使用 <code>jps</code> 命令查看进程。</p>
+<ul>
+<li>如果使用<strong>方式一 (Standalone)</strong> 启动，您应该能看到 <code>Master</code> 和 <code>Worker</code> 进程。</li>
+<li>如果使用<strong>方式二 (YARN)</strong>，您不会看到 <code>Master</code> 和 <code>Worker</code> 进程，这是正常的。</li>
+<li>无论哪种方式，只要启动了历史服务器，就应该能看到 <code>SparkHistoryServer</code> 进程。</li>
+</ul>
+<h3 id="11-访问Web端测试"><a href="#11-访问Web端测试" class="headerlink" title="11. 访问Web端测试"></a><strong>11. 访问Web端测试</strong></h3><ul>
+<li><strong>Spark Master Web UI (仅限Standalone模式)</strong>: <code>http://localhost:8080/</code></li>
+<li><strong>YARN ResourceManager Web UI</strong>: <code>http://localhost:8088/</code> (您可以通过这里查看提交到YARN上的Spark任务)</li>
+<li><strong>Spark History Server Web UI</strong>: <code>http://localhost:18080/</code></li>
+</ul>
+<h3 id="12-验证集群可用性（提交测试任务）"><a href="#12-验证集群可用性（提交测试任务）" class="headerlink" title="12. 验证集群可用性（提交测试任务）"></a><strong>12. 验证集群可用性（提交测试任务）</strong></h3><p><strong>测试一：提交到 Spark Standalone 集群</strong><br>(请确保您已通过 <code>$SPARK_HOME/sbin/start-all.sh</code> 启动了独立集群)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">spark-submit \<br>  --class org.apache.spark.examples.SparkPi \<br>  --master spark://localhost:7077 \<br>  --executor-memory 1g \<br>  --total-executor-cores 2 \<br>  <span class="hljs-variable">$SPARK_HOME</span>/examples/jars/spark-examples_2.12-3.3.4.jar \<br>  100<br></code></pre></td></tr></table></figure>
+
+<p><strong>测试二：提交到 YARN 集群</strong><br>(请确保您的YARN已启动，并且您<strong>没有</strong>启动Spark的 <code>start-all.sh</code>)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">spark-submit \<br>  --class org.apache.spark.examples.SparkPi \<br>  --master yarn \<br>  --deploy-mode client \<br>  --executor-memory 1g \<br>  --num-executors 1 \<br>  --executor-cores 2 \<br>  <span class="hljs-variable">$SPARK_HOME</span>/examples/jars/spark-examples_2.12-3.3.4.jar \<br>  100<br></code></pre></td></tr></table></figure>
+<p><strong>注意</strong>：提交到YARN时，参数略有不同。我们使用 <code>--master yarn</code> 来指定资源管理器，并用 <code>--num-executors</code> 和 <code>--executor-cores</code> 来控制资源。</p>
+<p>看到圆周率π的计算结果输出，即代表您在伪分布式环境上配置Spark成功！</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/qdblog/2026/01/28/CentOS%208%20%E4%B8%8A%E9%85%8D%E7%BD%AE%20OpenSSH%20%E6%9C%8D%E5%8A%A1%E5%99%A8/">← 下一篇 CentOS 8 上配置 OpenSSH 服务器</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/qdblog/2026/01/28/%E6%AF%8F%E6%AC%A1%E9%83%BD%E7%94%A8%E5%8F%88%E8%AE%B0%E4%B8%8D%E4%BD%8F%E6%89%80%E4%BB%A5%E5%86%99%E8%BF%99%E4%BA%86/">每次都用又记不住所以写这了 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" onClick="tocControl.change()" title="文章目录"><span class="tocBtnIconBar"></span><span class="tocBtnIconBar"></span><span class="tocBtnIconBar"></span></a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/qdblog/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">七斗</a></h1><div id="description"><p>————星球的诞生是自组织。</p></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">1. 前提条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%B8%8B%E8%BD%BD%E5%B9%B6%E8%A7%A3%E5%8E%8B-Spark"><span class="toc-number">2.</span> <span class="toc-text">2. 下载并解压 Spark</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">3.</span> <span class="toc-text">3. 配置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AE-Spark"><span class="toc-number">4.</span> <span class="toc-text">4. 配置 Spark</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E9%85%8D%E7%BD%AE-workers-%E6%96%87%E4%BB%B6"><span class="toc-number">5.</span> <span class="toc-text">5. 配置 workers 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E9%85%8D%E7%BD%AE-Spark-%E4%B8%8E-YARN-%E9%9B%86%E6%88%90"><span class="toc-number">6.</span> <span class="toc-text">6. 配置 Spark 与 YARN 集成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%88%86%E5%8F%91-Spark-%E5%88%B0%E6%89%80%E6%9C%89%E8%8A%82%E7%82%B9"><span class="toc-number">7.</span> <span class="toc-text">7. 分发 Spark 到所有节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E5%87%86%E5%A4%87-HDFS-%E7%9B%AE%E5%BD%95"><span class="toc-number">8.</span> <span class="toc-text">8. 准备 HDFS 目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E5%90%AF%E5%8A%A8-Spark-%E9%9B%86%E7%BE%A4"><span class="toc-number">9.</span> <span class="toc-text">9. 启动 Spark 集群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E6%9F%A5%E7%9C%8BSpark%E8%BF%9B%E7%A8%8B"><span class="toc-number">10.</span> <span class="toc-text">10. 查看Spark进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E8%AE%BF%E9%97%AEWeb%E7%AB%AF%E6%B5%8B%E8%AF%95"><span class="toc-number">11.</span> <span class="toc-text">11. 访问Web端测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E9%AA%8C%E8%AF%81%E9%9B%86%E7%BE%A4%E5%8F%AF%E7%94%A8%E6%80%A7%EF%BC%88%E6%8F%90%E4%BA%A4%E6%B5%8B%E8%AF%95%E4%BB%BB%E5%8A%A1%EF%BC%89"><span class="toc-number">12.</span> <span class="toc-text">12. 验证集群可用性（提交测试任务）</span></a></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>

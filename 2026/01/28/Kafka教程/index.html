@@ -1,0 +1,560 @@
+<!DOCTYPE html><html lang="en" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Kafka教程 | 七斗的猫猫海洋</title><link rel="icon" type="image/x-icon" href="/qdblog/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/qdblog/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/qdblog/font/BenderLight.woff2"><link rel="preload" as="font" crossorigin="anonymous" href="/qdblog/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/qdblog/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/qdblog/font/Bender.ttf"), url("/qdblog/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/qdblog/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/qdblog/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><meta name="page-config" content="{&quot;code_fold&quot;:null}"><script class="pjax-js">var config = {"root":"/qdblog/","code_fold":15,"search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"数据检索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}};
+var page_config = {
+  code_fold: null
+};
+function updatePageConfig() {
+  var newPageConfig = document.querySelector('meta[name="page-config"]');
+  if (newPageConfig) {
+    page_config = JSON.parse(newPageConfig.content);
+  }
+}
+document.addEventListener('pjax:complete', function() { updatePageConfig(); });
+updatePageConfig();</script><link type="text/css" rel="stylesheet" href="/qdblog/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/qdblog/lib/fontawesome/css/all.min.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/qdblog/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/qdblog/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/qdblog/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/qdblog/js/arknights.js"></script><script defer src="/qdblog/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/qdblog/lib/encrypt/hbe.js"></script><script async src="/qdblog/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.vercount','meta[name=page-config]'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+const postBg = document.querySelector('#post-bg');
+if (postBg) lightGallery(postBg, {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.vercount','meta[name=page-config]'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="数据检索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/qdblog/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/qdblog/archives/"><span class="navItemTitle">Archives</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>Kafka教程</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2026-01-28T15:54:33.227Z" id="date"> 2026-01-28</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2026-01-28T15:59:06.655Z" id="updated"> 2026-01-28</time></div></span></div></div><hr><div id="post-content"><p>本教程将指导您完成从零开始在类 RHEL (Red Hat, CentOS, Rocky Linux 等) 系统上安装和配置 <strong>Zookeeper</strong> 与 <strong>Kafka</strong> 的全过程。</p>
+<p>与许多过时的教程不同，本指南将：</p>
+<ol>
+<li><strong>解决实际问题</strong>：包括处理 <code>wget</code>、<code>java</code> 等依赖、<code>JAVA_HOME</code> 环境变量以及棘手的 <code>sudo</code> 权限问题。</li>
+<li><strong>使用现代命令</strong>：完全采用 Kafka 2.8+ 推荐的、基于 Broker 的管理命令（<code>--bootstrap-server</code>），而不是废弃的 <code>--zookeeper</code> 标记。</li>
+<li><strong>深入配置</strong>：不仅仅是“复制粘贴”。我们将把您提供的“知识”部分（第 3 章生产者、第 4 章消费者）完全融入教程中，详细解释每一个关键配置参数的含义和“为什么”。</li>
+<li><strong>解释核心概念</strong>：在您开始配置之前，我们将首先深入探讨“序列化”等 Kafka 核心概念，让您知其所以然。</li>
+</ol>
+<hr>
+<h2 id="第一部分：核心前置知识（The-“Why”）"><a href="#第一部分：核心前置知识（The-“Why”）" class="headerlink" title="第一部分：核心前置知识（The “Why”）"></a>第一部分：核心前置知识（The “Why”）</h2><p>在敲下第一行命令之前，我们必须理解我们正在构建的系统的核心概念。</p>
+<h3 id="1-1-背景：为何-Kafka-仍（暂时）需要-Zookeeper？"><a href="#1-1-背景：为何-Kafka-仍（暂时）需要-Zookeeper？" class="headerlink" title="1.1 背景：为何 Kafka 仍（暂时）需要 Zookeeper？"></a>1.1 背景：为何 Kafka 仍（暂时）需要 Zookeeper？</h3><p>您提供的教程背景知识非常到位：</p>
+<blockquote>
+<p>在较新的 Kafka 版本（2.8.0+）中，引入了基于 KRaft 协议的无 Zookeeper 模式，这已成为未来的趋势。但在 KRaft 成为主流并完全稳定之前，以及在许多现有系统中，Kafka 依然依赖 Zookeeper 来管理和协调集群。Zookeeper 负责存储集群的元数据（如 broker、主题、分区信息）和消费者状态等关键信息。因此，一个稳定运行的 Zookeeper 服务是传统 Kafka 集群正常工作的前提。</p>
+</blockquote>
+<p>本教程将构建的就是这种最广泛使用的、基于 Zookeeper 的 Kafka 集群。</p>
+<h3 id="1-2-Kafka-核心概念速览"><a href="#1-2-Kafka-核心概念速览" class="headerlink" title="1.2 Kafka 核心概念速览"></a>1.2 Kafka 核心概念速览</h3><ul>
+<li><strong>Broker</strong>：一台 Kafka 服务器。多个 Broker 组成了 Kafka 集群。</li>
+<li><strong>Topic（主题）</strong>：消息的类别。是 Kafka 中数据组织的基本单位。</li>
+<li><strong>Partition（分区）</strong>：Topic 的物理分组。一个 Topic 可以分为多个 Partition，分布在不同的 Broker 上。这是 Kafka 实现高吞吐量和水平扩展的关键。</li>
+<li><strong>Producer（生产者）</strong>：向 Kafka Topic 发送（写入）消息的客户端。</li>
+<li><strong>Consumer（消费者）</strong>：从 Kafka Topic 读取消息的客户端。</li>
+<li><strong>Consumer Group（消费者组）</strong>：一个或多个 Consumer 组成的逻辑分组。一个 Topic 的同一个 Partition，在同一时间只能被一个 Consumer Group 内的一个 Consumer 消费，这保证了消息的有序消费和负载均衡。</li>
+</ul>
+<h3 id="1-3-核心前置知识：序列化-Serialization"><a href="#1-3-核心前置知识：序列化-Serialization" class="headerlink" title="1.3 核心前置知识：序列化 (Serialization)"></a>1.3 核心前置知识：序列化 (Serialization)</h3><p>这是您提供的知识中最关键、也最容易被忽视的部分。在配置生产者&#x2F;消费者之前，必须理解它。</p>
+<h4 id="1-序列化到底是什么？-What-is-Serialization"><a href="#1-序列化到底是什么？-What-is-Serialization" class="headerlink" title="1. 序列化到底是什么？ (What is Serialization?)"></a>1. 序列化到底是什么？ (What is Serialization?)</h4><blockquote>
+<p>想象一下，你在程序里创建了一个对象，比如一个用户信息对象，它在内存里包含了用户名（字符串）、年龄（整数）、注册时间（日期对象）等信息。现在，你想通过网络把这个用户信息发送给另一个系统（比如 Kafka Broker），或者把它存到硬盘上。</p>
+<p>问题来了：网络和硬盘只能理解和传输字节流（一串 0 和 1），它们完全不认识你程序中的“对象”这个概念。</p>
+<p><strong>序列化（Serialization）</strong> 就是将内存中的数据结构或对象，转换成可以存储或传输的格式（通常是字节序列）的过程。</p>
+<p><strong>反序列化（Deserialization）</strong> 则是相反的过程，即将字节序列恢复为内存中的原始数据结构或对象。</p>
+<p>简单来说，序列化就是为你的数据“打包”，方便运输和存储；反序列化就是“拆开包裹”，恢复数据。</p>
+</blockquote>
+<h4 id="2-为什么-Kafka-强制要求使用序列化器？"><a href="#2-为什么-Kafka-强制要求使用序列化器？" class="headerlink" title="2. 为什么 Kafka 强制要求使用序列化器？"></a>2. 为什么 Kafka 强制要求使用序列化器？</h4><p>Kafka 是一个分布式的消息系统。它的核心工作流程如下：</p>
+<ol>
+<li><strong>生产者 (Producer)</strong>：在你的应用程序中，将消息（记录）发送到 Kafka Broker。</li>
+<li><strong>Broker</strong>：Kafka 服务器，负责接收、存储和转发消息。</li>
+<li><strong>消费者 (Consumer)</strong>：从 Kafka Broker 拉取消息，并在你的另一个应用程序中进行处理。</li>
+</ol>
+<p>在这个过程中，消息至少要经过两次网络传输（Producer -&gt; Broker, Broker -&gt; Consumer）和一次磁盘存储（在 Broker 上）。如上所述，这些环节都只认<strong>字节</strong>。</p>
+<p>因此，Kafka 强制要求：</p>
+<ul>
+<li>生产者在发送数据前，必须配置一个<strong>序列化器 (Serializer)</strong>，将键（key）和值（value）从它们的对象形式转换为<strong>字节数组 (byte[])</strong>。</li>
+<li>消费者在接收数据后，必须配置一个<strong>反序列化器 (Deserializer)</strong>，将从 Broker 收到的<strong>字节数组 (byte[])</strong> 转换回它原本的对象形式，以便程序处理。</li>
+</ul>
+<h4 id="3-Kafka-内置的序列化器及其局限性"><a href="#3-Kafka-内置的序列化器及其局限性" class="headerlink" title="3. Kafka 内置的序列化器及其局限性"></a>3. Kafka 内置的序列化器及其局限性</h4><p>Kafka 自带了一些开箱即用的序列化器，位于 <code>org.apache.kafka.common.serialization</code> 包下：</p>
+<ul>
+<li><code>StringSerializer</code>: 用于序列化字符串。</li>
+<li><code>IntegerSerializer</code>: 用于序列化整数。</li>
+<li><code>LongSerializer</code>: 用于序列化长整型。</li>
+<li><code>ByteArraySerializer</code>: 用于序列化字节数组（实际上它什么也不做，直接返回原始字节数组）。</li>
+</ul>
+<p><strong>局限性：</strong> 这些内置的序列化器只能处理非常简单的数据类型。在实际业务中，我们发送的消息通常是复杂的业务对象，比如订单、用户信息、日志事件等。这时，我们就需要自定义序列化器。</p>
+<h4 id="4-推荐方案：使用-Avro-和-Schema-Registry"><a href="#4-推荐方案：使用-Avro-和-Schema-Registry" class="headerlink" title="4. 推荐方案：使用 Avro 和 Schema Registry"></a>4. 推荐方案：使用 Avro 和 Schema Registry</h4><p>您提供的资料中还提到了 JSON 作为自定义序列化方案，这是一个很好的起点。但它有几个缺点：</p>
+<ol>
+<li><strong>冗余信息</strong>：JSON 格式中包含大量的键名，浪费存储和网络带宽。</li>
+<li><strong>无 Schema 约束</strong>：JSON 本身不强制数据结构。生产者可以随意修改字段，导致消费者崩溃。</li>
+<li><strong>Schema 演进困难</strong>：当业务发展，需要增删字段时，保证新旧版本兼容非常棘手。</li>
+</ol>
+<p>为了解决这些问题，社区推荐使用 <strong>Apache Avro</strong> 配合 <strong>Schema Registry</strong>。</p>
+<ul>
+<li><strong>Avro</strong> 是一个数据序列化系统。它使用基于 JSON 的 Schema (模式) 来定义数据结构，并将数据序列化成<strong>非常紧凑的二进制格式</strong>。</li>
+<li><strong>Schema Registry</strong> 是一个独立的、管理所有 Avro Schema 的服务。</li>
+</ul>
+<p><strong>工作流程：</strong></p>
+<ol>
+<li>生产者将 Schema 注册到 Schema Registry，获得一个唯一的 <strong>Schema ID</strong>。</li>
+<li>生产者使用 Avro 将对象序列化成二进制数据，并在消息中只包含这个 <strong>Schema ID</strong> 和<strong>二进制数据</strong>。</li>
+<li>消费者读到消息，提取出 Schema ID。</li>
+<li>消费者用这个 ID 去 Schema Registry 拉取完整的 Schema（如果本地没有缓存的话）。</li>
+<li>消费者使用该 Schema 将二进制数据反序列化成对象。</li>
+</ol>
+<p><strong>巨大优势：</strong></p>
+<ul>
+<li><strong>高效存储</strong>：二进制格式非常紧凑，Schema 不随每条消息发送，极大节省空间。</li>
+<li><strong>强数据一致性</strong>：所有数据都必须符合预先定义的 Schema。</li>
+<li><strong>强大的 Schema 演进</strong>：Avro 制定了详细的兼容性规则。你可以安全地为 Schema 添加可选字段等，同时保证新旧版本的生产者和消费者之间不会中断服务。</li>
+</ul>
+<blockquote>
+<p><strong>结论</strong>：对于学习，使用 <code>StringSerializer</code> 即可。对于生产，<strong>强烈建议</strong>直接采用 Avro + Schema Registry 的方案。</p>
+</blockquote>
+<hr>
+<h2 id="第二部分：安装和配置-Zookeeper-3-8-x"><a href="#第二部分：安装和配置-Zookeeper-3-8-x" class="headerlink" title="第二部分：安装和配置 Zookeeper (3.8.x)"></a>第二部分：安装和配置 Zookeeper (3.8.x)</h2><p>现在，我们开始动手实践。我们将严格按照您提供的“更新版”教程步骤进行。</p>
+<h3 id="第-1-步：准备工作-安装必要工具"><a href="#第-1-步：准备工作-安装必要工具" class="headerlink" title="第 1 步：准备工作 - 安装必要工具"></a>第 1 步：准备工作 - 安装必要工具</h3><p>在现代的 RHEL 系统（如 RHEL 8&#x2F;9, Rocky Linux 8&#x2F;9）上，<code>wget</code> 可能没有预装。</p>
+<ul>
+<li><p><strong>命令解释</strong>：</p>
+<ul>
+<li><code>sudo</code>：以管理员（root）权限执行命令。安装软件需要系统权限。</li>
+<li><code>dnf</code>：是 RHEL 8+ 上的新一代包管理器（替代了 <code>yum</code>）。</li>
+<li><code>install wget</code>：告诉 <code>dnf</code> 我们要安装 <code>wget</code> 这个工具。<code>wget</code> 用于从网络上下载文件。</li>
+</ul>
+</li>
+<li><p><strong>执行</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">[qd@qd ~]$ <span class="hljs-built_in">sudo</span> dnf install wget<br><span class="hljs-comment"># [输入您的用户密码]</span><br><span class="hljs-comment"># ... 等待安装完成 ...</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="第-2-步：安装和配置-Java-环境-关键依赖"><a href="#第-2-步：安装和配置-Java-环境-关键依赖" class="headerlink" title="第 2 步：安装和配置 Java 环境 (关键依赖)"></a>第 2 步：安装和配置 Java 环境 (关键依赖)</h3><p>Zookeeper 和 Kafka 都是用 Java 编写的，必须在 Java 虚拟机（JVM）上运行。您在日志中遇到的 <code>Error: JAVA_HOME is not set</code> 是一个经典错误。</p>
+<ul>
+<li><p><strong>命令解释与执行</strong>：</p>
+<ol>
+<li><p><strong>安装 Java</strong>：我们安装 OpenJDK 17，这是一个长期支持（LTS）版本，与 ZK 3.8+ 和新版 Kafka 兼容良好。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">[qd@qd ~]$ <span class="hljs-built_in">sudo</span> dnf install openjdk-17-jre<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查找 Java 安装路径</strong>：我们需要设置 <code>JAVA_HOME</code> 环境变量，它告诉系统 Java 的“家”在哪里。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">[qd@qd ~]$ <span class="hljs-built_in">readlink</span> -f $(<span class="hljs-built_in">which</span> java)<br><span class="hljs-comment"># 假设输出: /usr/lib/jvm/java-17-openjdk-17.0.x.x-x.el8.x86_64/bin/java</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>设置永久环境变量</strong>：我们将其写入 <code>~/.bashrc</code> 文件，这样每次登录时都会自动生效。</p>
+<ul>
+<li><code>JAVA_HOME</code> 的路径是上面查找到的路径去掉末尾的 <code>/bin/java</code>。</li>
+</ul>
+<!-- end list -->
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">[qd@qd ~]$ vi ~/.bashrc<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>在文件末尾添加以下两行 (按 <code>G</code> 到末尾，按 <code>o</code> 新起一行)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#</span><br><span class="hljs-comment"># 设置 JAVA_HOME</span><br><span class="hljs-built_in">export</span> JAVA_HOME=/usr/lib/jvm/java-17-openjdk-17.0.x.x-x.el8.x86_64<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$JAVA_HOME</span>/bin<br></code></pre></td></tr></table></figure>
+
+<p><em>(请将路径替换为您上一步查到的真实路径)</em></p>
+</li>
+<li><p>保存退出 (按 <code>Esc</code>，输入 <code>:wq</code>，回车)，然后让配置<strong>立即生效</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">[qd@qd ~]$ <span class="hljs-built_in">source</span> ~/.bashrc<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>验证配置</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">[qd@qd ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$JAVA_HOME</span><br>/usr/lib/jvm/java-17-openjdk-17.0.x.x-x.el8.x86_64<br><br>[qd@qd ~]$ java --version<br><span class="hljs-comment"># 应该能看到 Java 17 的版本信息</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+<h3 id="第-3-步：下载并解压-Zookeeper"><a href="#第-3-步：下载并解压-Zookeeper" class="headerlink" title="第 3 步：下载并解压 Zookeeper"></a>第 3 步：下载并解压 Zookeeper</h3><ul>
+<li><p><strong>注意</strong>：务必下载带有 <code>-bin</code> 标志的<strong>二进制包 (binary)</strong>。源码包 (src) 无法直接运行。</p>
+</li>
+<li><p><strong>命令解释与执行</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 使用 wget 下载 (以 3.8.5 为例)</span><br>[qd@qd ~]$ wget https://dlcdn.apache.org/zookeeper/zookeeper-3.8.5/apache-zookeeper-3.8.5-bin.tar.gz<br><br><span class="hljs-comment"># 2. 解压</span><br><span class="hljs-comment"># -z: 处理 .gz 压缩</span><br><span class="hljs-comment"># -x: 解压 (extract)</span><br><span class="hljs-comment"># -f: 指定文件名 (file)</span><br>[qd@qd ~]$ tar -zxf apache-zookeeper-3.8.5-bin.tar.gz<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="第-4-步：安装-Zookeeper-并创建数据目录"><a href="#第-4-步：安装-Zookeeper-并创建数据目录" class="headerlink" title="第 4 步：安装 Zookeeper 并创建数据目录"></a>第 4 步：安装 Zookeeper 并创建数据目录</h3><p>我们将 Zookeeper 安装在 <code>/usr/local</code> (用于存放用户安装的软件)，并将其数据存放在 <code>/var/lib</code> (用于存放易变的应用状态数据)。</p>
+<ul>
+<li><p><strong>命令解释与执行</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 移动并重命名文件夹</span><br><span class="hljs-comment"># /usr/local 是系统目录，必须用 sudo</span><br>[qd@qd ~]$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mv</span> apache-zookeeper-3.8.5-bin /usr/local/zookeeper<br><br><span class="hljs-comment"># 2. 创建 ZK 数据目录</span><br><span class="hljs-comment"># /var/lib 也是系统目录</span><br><span class="hljs-comment"># -p: 确保父目录不存在时也一并创建</span><br>[qd@qd ~]$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p /var/lib/zookeeper<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="第-5-步：配置-Zookeeper-zoo-cfg"><a href="#第-5-步：配置-Zookeeper-zoo-cfg" class="headerlink" title="第 5 步：配置 Zookeeper (zoo.cfg)"></a>第 5 步：配置 Zookeeper (zoo.cfg)</h3><p>ZK 的配置非常简单。</p>
+<ul>
+<li><p><strong>命令解释与执行</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 进入 ZK 配置目录</span><br>[qd@qd ~]$ <span class="hljs-built_in">cd</span> /usr/local/zookeeper/conf/<br><br><span class="hljs-comment"># 2. 复制官方示例配置 (需要 sudo)</span><br>[qd@qd conf]$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> zoo_sample.cfg zoo.cfg<br><br><span class="hljs-comment"># 3. 编辑新配置文件 (需要 sudo)</span><br>[qd@qd conf]$ <span class="hljs-built_in">sudo</span> vi zoo.cfg<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置文件内容</strong>：<br>确保 <code>zoo.cfg</code> 文件中，<code>dataDir</code> 的路径被正确修改，指向我们在上一步创建的目录。其他可以暂时保持默认。</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-comment"># Zookeeper 中时间的基本单位，毫秒</span><br><span class="hljs-attr">tickTime</span>=<span class="hljs-string">2000</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"># ZK  follower 连接和同步 leader 的初始时限</span><br><span class="hljs-attr">initLimit</span>=<span class="hljs-string">10</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"># ZK follower 和 leader 之间请求和应答的时限</span><br><span class="hljs-attr">syncLimit</span>=<span class="hljs-string">5</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"># ！！！！这是唯一必须修改的配置！！！！</span><br><span class="hljs-comment"># 数据目录，必须与第 4 步创建的目录一致</span><br><span class="hljs-attr">dataDir</span>=<span class="hljs-string">/var/lib/zookeeper</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"># 客户端连接 Zookeeper 的端口</span><br><span class="hljs-attr">clientPort</span>=<span class="hljs-string">2181</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="第-6-步：解决权限问题并启动-Zookeeper"><a href="#第-6-步：解决权限问题并启动-Zookeeper" class="headerlink" title="第 6 步：解决权限问题并启动 Zookeeper"></a>第 6 步：解决权限问题并启动 Zookeeper</h3><p>这是您在日志中遇到的 <code>FAILED TO WRITE PID</code> 权限错误。</p>
+<ul>
+<li><p><strong>问题根源</strong>：<code>/var/lib/zookeeper</code> 目录是我们用 <code>sudo</code> 创建的，其所有者是 <code>root</code> 用户。当我们尝试以普通用户 <code>qd</code> 启动 ZK 时，<code>qd</code> 用户无权在该目录下写入数据（包括 PID 文件和快照）。</p>
+</li>
+<li><p><strong>解决方案 A (不推荐)</strong>：<code>sudo /usr/local/zookeeper/bin/zkServer.sh start</code></p>
+<ul>
+<li>这能启动，但是以 root 身份运行服务是一个严重的安全隐患。</li>
+</ul>
+</li>
+<li><p><strong>解决方案 B (推荐做法)</strong>：<strong>更改目录所有权</strong></p>
+<ul>
+<li>我们将数据目录的所有权交给将要运行服务的用户（这里是 <code>qd</code>）。</li>
+</ul>
+<!-- end list -->
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 将 /var/lib/zookeeper 目录及其下所有文件 (-R) 的所有者和所属组都更改为 qd。</span><br>[qd@qd ~]$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> -R qd:qd /var/lib/zookeeper<br><br><span class="hljs-comment"># 2. 完成后，就可以用普通用户身份直接启动了。</span><br>[qd@qd ~]$ /usr/local/zookeeper/bin/zkServer.sh start<br><span class="hljs-comment"># JMX enabled by default</span><br><span class="hljs-comment"># Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg</span><br><span class="hljs-comment"># Starting zookeeper ... STARTED</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="第-7-步：验证-Zookeeper-服务"><a href="#第-7-步：验证-Zookeeper-服务" class="headerlink" title="第 7 步：验证 Zookeeper 服务"></a>第 7 步：验证 Zookeeper 服务</h3><ul>
+<li><p><strong>方法 1: 使用 <code>jps</code> (Java Process Status)</strong><br><code>jps</code> 可以列出当前用户的所有 Java 进程。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">[qd@qd ~]$ jps<br><span class="hljs-comment"># 您应该能看到一个名为 QuorumPeerMain 的进程 (ZK 的主进程)</span><br>12345 QuorumPeerMain<br>12346 Jps<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>方法 2: 使用四字命令 (Four Letter Words)</strong><br>Zookeeper 监听一个端口，并能响应一组特殊的四字诊断命令。<code>srvr</code> 是其中之一。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 安装 nc (Netcat)，它比 telnet 更好用</span><br>[qd@qd ~]$ <span class="hljs-built_in">sudo</span> dnf install nmap-ncat<br><br><span class="hljs-comment"># 2. 发送 &quot;srvr&quot; 命令到 2181 端口</span><br>[qd@qd ~]$ <span class="hljs-built_in">echo</span> srvr | nc localhost 2181<br><br><span class="hljs-comment"># 3. 查看返回信息</span><br>Zookeeper version: 3.8.5-19f1842d4b6ee1f82cc8b05284959b26c6ae507d, built on 2025-09-03 21:35 UTC<br>...<br>Mode: standalone   <span class="hljs-comment"># 看到这个，表示是单机模式，成功！</span><br>Node count: 4<br></code></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="第三部分：安装和配置-Kafka"><a href="#第三部分：安装和配置-Kafka" class="headerlink" title="第三部分：安装和配置 Kafka"></a>第三部分：安装和配置 Kafka</h2><p>Zookeeper 基础打好了，现在我们来安装 Kafka。</p>
+<h3 id="第-1-步：下载并解压-Kafka"><a href="#第-1-步：下载并解压-Kafka" class="headerlink" title="第 1 步：下载并解压 Kafka"></a>第 1 步：下载并解压 Kafka</h3><ul>
+<li><p><strong>关键陷阱</strong>：您在日志中也遇到了这个 <code>Classpath is empty</code> 错误。</p>
+<ul>
+<li><strong>不要下载</strong> <code>kafka-3.x.x-src.tgz</code> (源码包)</li>
+<li><strong>必须下载</strong> <code>kafka_2.13-3.x.x.tgz</code> (二进制包)。<code>2.13</code> 是 Scala 版本号，<code>3.x.x</code> 是 Kafka 版本号。</li>
+</ul>
+</li>
+<li><p><strong>命令解释与执行</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 下载 Kafka (以 3.9.1 为例)</span><br>[qd@qd ~]$ wget https://dlcdn.apache.org/kafka/3.9.1/kafka_2.13-3.9.1.tgz<br><br><span class="hljs-comment"># 2. 解压</span><br>[qd@qd ~]$ tar -zxf kafka_2.13-3.9.1.tgz<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="第-2-步：安装-Kafka"><a href="#第-2-步：安装-Kafka" class="headerlink" title="第 2 步：安装 Kafka"></a>第 2 步：安装 Kafka</h3><p>与 Zookeeper 类似，我们将 Kafka 安装到 <code>/usr/local</code>。</p>
+<ul>
+<li><p><strong>命令解释与执行</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 移动并重命名 (需要 sudo)</span><br>[qd@qd ~]$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mv</span> kafka_2.13-3.9.1 /usr/local/kafka<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="第-3-步：配置-Kafka-server-properties"><a href="#第-3-步：配置-Kafka-server-properties" class="headerlink" title="第 3 步：配置 Kafka (server.properties)"></a>第 3 步：配置 Kafka (server.properties)</h3><p>这是 Kafka Broker 的核心配置文件。您提供的 <code>server.properties</code> 内容非常适合单机测试。</p>
+<ul>
+<li><p><strong>命令解释与执行</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 进入 Kafka 配置目录</span><br>[qd@qd ~]$ <span class="hljs-built_in">cd</span> /usr/local/kafka/config/<br><br><span class="hljs-comment"># 2. 编辑配置文件 (我们用普通用户 qd 启动，先确保我们有权限)</span><br><span class="hljs-comment"># 更改 /usr/local/kafka 目录的所有权为 qd (生产环境会有专门的 service-account)</span><br>[qd@qd config]$ <span class="hljs-built_in">cd</span> /usr/local<br>[qd@qd <span class="hljs-built_in">local</span>]$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> -R qd:qd kafka<br><br><span class="hljs-comment"># 3. 现在可以不用 sudo 编辑了</span><br>[qd@qd <span class="hljs-built_in">local</span>]$ <span class="hljs-built_in">cd</span> kafka/config<br>[qd@qd config]$ vi server.properties<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>核心配置详解</strong>：<br>打开 <code>server.properties</code> 文件，确保以下几项配置正确。</p>
+<ol>
+<li><p><strong>服务器基础 (Server Basics)</strong></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-comment"># broker.id 在一个 Kafka 集群中必须是唯一的整数。</span><br><span class="hljs-comment"># 对于单节点测试，0 即可。在集群中，每个 broker 都必须有不同的 ID。</span><br><span class="hljs-attr">broker.id</span>=<span class="hljs-string">0</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>网络与套接字设置 (Socket Server Settings)</strong></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-comment"># Kafka 服务监听的地址和端口。</span><br><span class="hljs-comment"># PLAINTEXT 是监听器名称，localhost:9092 是监听的主机和端口。</span><br><span class="hljs-comment"># 这意味着只有在本机上才能连接到 Kafka。</span><br><span class="hljs-comment"># 警告：如果您的生产者/消费者在另一台机器上，必须将 localhost 改为 0.0.0.0</span><br><span class="hljs-comment">#       或该主机的内网/外网 IP 地址。</span><br><span class="hljs-attr">listeners</span>=<span class="hljs-string">PLAINTEXT://localhost:9092</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>日志基础 (Log Basics)</strong></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-comment"># Kafka 存储 topic 数据的目录。</span><br><span class="hljs-comment"># 警告：/tmp/kafka-logs 是默认的，但 /tmp 目录在系统重启时可能会被清空！</span><br><span class="hljs-comment"># 生产环境必须改为一个持久化目录，例如 /var/lib/kafka-logs</span><br><span class="hljs-attr">log.dirs</span>=<span class="hljs-string">/tmp/kafka-logs</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"># 新建 topic 时默认的分区数量。</span><br><span class="hljs-attr">num.partitions</span>=<span class="hljs-string">1</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>内部主题设置 (Internal Topic Settings) - [单机关键]</strong></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-comment"># Kafka 内部用于存储消费者位移(__consumer_offsets)的主题的副本因子。</span><br><span class="hljs-comment"># 在单节点环境中，这个值【只能是 1】。</span><br><span class="hljs-comment"># 如果是 3 (默认值)，Kafka 会因找不到另外两个副本而无法启动。</span><br><span class="hljs-attr">offsets.topic.replication.factor</span>=<span class="hljs-string">1</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"># 事务状态日志的副本因子，同上，单机必须为 1</span><br><span class="hljs-attr">transaction.state.log.replication.factor</span>=<span class="hljs-string">1</span><br><span class="hljs-attr">transaction.state.log.min.isr</span>=<span class="hljs-string">1</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Zookeeper 连接 (Zookeeper) - [核心]</strong></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-comment"># 这是最关键的配置之一！</span><br><span class="hljs-comment"># 指定 Zookeeper 集群的地址。</span><br><span class="hljs-comment"># 这里的 localhost:2181 必须与我们第二部分中 Zookeeper 的 clientPort 配置一致。</span><br><span class="hljs-attr">zookeeper.connect</span>=<span class="hljs-string">localhost:2181</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"># 连接 Zookeeper 的超时时间（毫秒）。</span><br><span class="hljs-attr">zookeeper.connection.timeout.ms</span>=<span class="hljs-string">18000</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+<h3 id="第-4-步：创建-Kafka-日志目录"><a href="#第-4-步：创建-Kafka-日志目录" class="headerlink" title="第 4 步：创建 Kafka 日志目录"></a>第 4 步：创建 Kafka 日志目录</h3><p>根据 <code>server.properties</code> 中的 <code>log.dirs</code> 配置，我们需要<strong>手动创建</strong>该目录。</p>
+<ul>
+<li><p><strong>命令解释与执行</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 创建在配置文件中指定的日志目录</span><br><span class="hljs-comment"># 因为我们上一步把 /usr/local/kafka 给了 qd 用户，</span><br><span class="hljs-comment"># 我们也应该把数据目录 /tmp/kafka-logs (或 /var/lib/kafka-logs) 权限给 qd</span><br><br><span class="hljs-comment"># 1. 创建目录 (以 /tmp 为例)</span><br>[qd@qd ~]$ <span class="hljs-built_in">mkdir</span> /tmp/kafka-logs<br><br><span class="hljs-comment"># (推荐) 如果您使用了 /var/lib/kafka-logs，请执行：</span><br><span class="hljs-comment"># [qd@qd ~]$ sudo mkdir /var/lib/kafka-logs</span><br><span class="hljs-comment"># [qd@qd ~]$ sudo chown -R qd:qd /var/lib/kafka-logs</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="第-5-步：启动-Kafka-服务器"><a href="#第-5-步：启动-Kafka-服务器" class="headerlink" title="第 5 步：启动 Kafka 服务器"></a>第 5 步：启动 Kafka 服务器</h3><p>一切准备就绪，现在我们可以启动 Kafka 了。</p>
+<ul>
+<li><p><strong>命令解释与执行</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># /usr/local/kafka/bin/kafka-server-start.sh 是 Kafka 的启动脚本。</span><br><span class="hljs-comment"># -daemon 参数会让 Kafka 在后台作为守护进程运行。</span><br><span class="hljs-comment"># 最后一个参数是我们的配置文件路径。</span><br>[qd@qd ~]$ /usr/local/kafka/bin/kafka-server-start.sh -daemon /usr/local/kafka/config/server.properties<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="第-6-步：验证-Kafka-服务"><a href="#第-6-步：验证-Kafka-服务" class="headerlink" title="第 6 步：验证 Kafka 服务"></a>第 6 步：验证 Kafka 服务</h3><p>等待片刻，让 Kafka 完成启动。</p>
+<ol>
+<li><p><strong>使用 <code>jps</code> 查看 Java 进程：</strong><br>您应该能<strong>同时</strong>看到 Zookeeper 的 <code>QuorumPeerMain</code> 和 Kafka 的 <code>Kafka</code> 进程。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">[qd@qd ~]$ jps<br>12345 Kafka             <span class="hljs-comment"># Kafka Broker 进程</span><br>54321 QuorumPeerMain    <span class="hljs-comment"># Zookeeper 进程</span><br>... Jps<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>检查 Kafka 日志 (排错关键)：</strong><br>如果启动失败，最重要的排错信息通常在日志文件的末尾。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看 Kafka 服务端日志</span><br>[qd@qd ~]$ <span class="hljs-built_in">tail</span> -f /tmp/kafka-logs/server.log<br></code></pre></td></tr></table></figure>
+
+<p>如果看到 <code>[KafkaServer id=0] started</code> 类似的信息，说明 Kafka 已成功启动！</p>
+</li>
+</ol>
+<hr>
+<h2 id="第四部分：Kafka-核心操作-使用新版命令"><a href="#第四部分：Kafka-核心操作-使用新版命令" class="headerlink" title="第四部分：Kafka 核心操作 (使用新版命令)"></a>第四部分：Kafka 核心操作 (使用新版命令)</h2><p>恭喜！您的 Kafka + Zookeeper 环境已成功运行。现在我们来测试它。</p>
+<blockquote>
+<p><strong>重要：命令演进 (The “New Way”)</strong></p>
+<p>过去，Kafka 的管理脚本 (如 <code>kafka-topics.sh</code>) 依赖 Zookeeper (使用 <code>--zookeeper</code> 参数) 来读写元数据。</p>
+<p>从 Kafka 2.8+ 开始，Kafka 社区大力推动将 Zookeeper 变为内部实现细节。所有管理命令<strong>都应</strong>通过 Kafka Broker 自己的 API 来执行。</p>
+<p>因此，旧的 <code>--zookeeper</code> 参数已被<strong>废弃</strong>，您<strong>必须</strong>使用 <code>--bootstrap-server</code> 来指向 Kafka Broker (e.g., <code>localhost:9092</code>)。</p>
+<p>您提供的“新版命令”是完全正确的，我们将使用它。</p>
+</blockquote>
+<hr>
+<h3 id="1-创建并验证主题-Topic"><a href="#1-创建并验证主题-Topic" class="headerlink" title="1. 创建并验证主题 (Topic)"></a>1. 创建并验证主题 (Topic)</h3><ul>
+<li><p><strong>创建名为 <code>test</code> 的主题：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 注意：这里是关键变化，使用 --bootstrap-server 代替 --zookeeper</span><br>[qd@qd ~]$ /usr/local/kafka/bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic <span class="hljs-built_in">test</span><br><br><span class="hljs-comment"># 成功后会看到提示：</span><br><span class="hljs-comment"># Created topic &quot;test&quot;.</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看 <code>test</code> 主题的详细信息：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">[qd@qd ~]$ /usr/local/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic <span class="hljs-built_in">test</span><br><br><span class="hljs-comment"># 输出结果：</span><br><span class="hljs-comment"># Topic: test  TopicId: [ID]  PartitionCount: 1  ReplicationFactor: 1 ...</span><br><span class="hljs-comment">#   Topic: test  Partition: 0  Leader: 0  Replicas: 0  Isr: 0</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="2-发布消息-Produce"><a href="#2-发布消息-Produce" class="headerlink" title="2. 发布消息 (Produce)"></a>2. 发布消息 (Produce)</h3><ul>
+<li><p><strong>启动控制台生产者：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 注意：参数名从 --broker-list 统一为 --bootstrap-server</span><br>[qd@qd ~]$ /usr/local/kafka/bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>输入消息并发送：</strong><br>启动后，您会看到一个 <code>&gt;</code> 提示符。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">&gt;Hello Kafka<br>&gt;This is the new way<br>&gt;...<br></code></pre></td></tr></table></figure>
+
+<p>(输入完成后，按 <code>Ctrl+C</code> 退出生产者，<em>不要按 Ctrl+D，新版 Kafka 可能有 bug</em>)</p>
+</li>
+</ul>
+<h3 id="3-读取消息-Consume"><a href="#3-读取消息-Consume" class="headerlink" title="3. 读取消息 (Consume)"></a>3. 读取消息 (Consume)</h3><ul>
+<li><p><strong>启动控制台消费者 (在新的终端窗口)：</strong><br>打开一个新的 SSH 会话或终端标签页，登录到您的服务器。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 注意：消费者也使用 --bootstrap-server 连接</span><br><span class="hljs-comment"># --from-beginning: 确保我们能读到历史消息，而不是只读新消息</span><br>[qd@qd ~]$ /usr/local/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic <span class="hljs-built_in">test</span> --from-beginning<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看消费结果：</strong><br>你将会在终端看到刚才发送的两条消息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">Hello Kafka<br>This is the new way<br></code></pre></td></tr></table></figure>
+
+<p>(按 <code>Ctrl+C</code> 停止消费者)</p>
+</li>
+</ul>
+<hr>
+<h2 id="第五部分：深入-Kafka-生产者-Producer"><a href="#第五部分：深入-Kafka-生产者-Producer" class="headerlink" title="第五部分：深入 Kafka 生产者 (Producer)"></a>第五部分：深入 Kafka 生产者 (Producer)</h2><p>您已经使用 <code>kafka-console-producer.sh</code> 成功发送了消息。但<br>在真实的应用中，您会使用 Java、Python 或 Go 的客户端来编写生产者程序。</p>
+<p>此时，您提供的“<strong>第 3 章 知识</strong>”就变得至关重要。</p>
+<h3 id="3-2-创建-Kafka-生产者-程序中"><a href="#3-2-创建-Kafka-生产者-程序中" class="headerlink" title="3.2 创建 Kafka 生产者 (程序中)"></a>3.2 创建 Kafka 生产者 (程序中)</h3><p>在 Java 程序中创建生产者时，您需要提供一个 <code>Properties</code> 对象。其中有 3 个<strong>必选属性</strong>。</p>
+<ol>
+<li><p><code>bootstrap.servers</code></p>
+<ul>
+<li><strong>解释</strong>：指定 broker 的地址清单，格式为 <code>host:port</code>。</li>
+<li><strong>详细</strong>：清单里不需要包含所有的 broker 地址，生产者会从给定的 broker 里查找到其他 broker 的信息。不过<strong>建议至少要提供两个 broker 的信息</strong>，一旦其中一个宕机，生产者仍然能够连接到集群上。（对于我们的单机测试，<code>localhost:9092</code> 即可）。</li>
+</ul>
+</li>
+<li><p><code>key.serializer</code></p>
+<ul>
+<li><strong>解释</strong>：键（Key）的序列化器。</li>
+<li><strong>详细</strong>：Broker 希望接收到的消息的键和值都是字节数组。<code>key.serializer</code> 必须被设置为一个实现了 <code>Serializer</code> 接口的类。生产者会使用这个类把键对象序列化成字节数组。</li>
+<li><strong>参见第一部分</strong>：这就是我们详细讨论过的“序列化”。如果您使用 <code>String</code> 作为键，这里就设置为 <code>org.apache.kafka.common.serialization.StringSerializer</code>。</li>
+</ul>
+</li>
+<li><p><code>value.serializer</code></p>
+<ul>
+<li><strong>解释</strong>：值（Value）的序列化器。</li>
+<li><strong>详细</strong>：与 <code>key.serializer</code> 一样，<code>value.serializer</code> 指定的类会将值序列化。如果您发送 <code>String</code> 消息，这里也设置为 <code>org.apache.kafka.common.serialization.StringSerializer</code>。</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-4-生产者的关键配置详解"><a href="#3-4-生产者的关键配置详解" class="headerlink" title="3.4 生产者的关键配置详解"></a>3.4 生产者的关键配置详解</h3><p>以下是您提供的知识库中，对生产者<strong>性能、可靠性、内存</strong>影响最大的参数。</p>
+<h4 id="01-acks-数据持久性"><a href="#01-acks-数据持久性" class="headerlink" title="01. acks (数据持久性)"></a>01. <code>acks</code> (数据持久性)</h4><p>该参数指定了必须要有多少个分区副本收到消息，生产者才会认为消息写入是成功的。</p>
+<ul>
+<li><p><code>acks=0</code>：<strong>“发后即忘”</strong>。生产者在成功写入消息之前不会等待任何来自服务器的响应。如果服务器没有收到消息（例如 Broker 宕机），生产者<strong>无从得知</strong>，消息<strong>会丢失</strong>。</p>
+<ul>
+<li><strong>优点</strong>：极高的吞吐量和极低的延迟。</li>
+<li><strong>缺点</strong>：零持久性保证。</li>
+</ul>
+</li>
+<li><p><code>acks=1</code>：<strong>“Leader 确认” (默认值)</strong>。只要集群的 Leader 节点收到消息，生产者就会收到一个来自服务器的成功响应。</p>
+<ul>
+<li><strong>优点</strong>：良好的吞吐量和延迟。</li>
+<li><strong>缺点</strong>：如果 Leader 节点刚收到消息但还未复制给 Follower 节点就宕机了，那么新选举出的 Leader 上并没有这条消息，消息<strong>依然会丢失</strong>。</li>
+</ul>
+</li>
+<li><p><code>acks=all</code> (或 <code>acks=-1</code>)：<strong>“全员确认”</strong>。只有当<strong>所有</strong>参与复制的节点（ISR - In-Sync Replicas）全部收到消息时，生产者才会收到一个来自服务器的成功响应。</p>
+<ul>
+<li><strong>优点</strong>：<strong>最强</strong>的持久性保证。只要至少还有一个副本存活，消息就不会丢失。</li>
+<li><strong>缺点</strong>：延迟最高，吞吐量最低。</li>
+</ul>
+</li>
+</ul>
+<h4 id="02-buffer-memory-内存管理"><a href="#02-buffer-memory-内存管理" class="headerlink" title="02. buffer.memory (内存管理)"></a>02. <code>buffer.memory</code> (内存管理)</h4><ul>
+<li><strong>解释</strong>：该参数用来设置生产者<strong>客户端</strong>内存缓冲区的大小，生产者用它缓冲要发送到服务器的消息。</li>
+<li><strong>详细</strong>：如果应用程序发送消息的速度超过发送到服务器的速度，会导致生产者空间不足。默认 32MB。</li>
+</ul>
+<h4 id="03-compression-type-网络效率"><a href="#03-compression-type-网络效率" class="headerlink" title="03. compression.type (网络效率)"></a>03. <code>compression.type</code> (网络效率)</h4><ul>
+<li><strong>解释</strong>：默认情况下，消息发送时不会被压缩。该参数可以设置为 <code>snappy</code>、<code>gzip</code>、<code>lz4</code> 或 <code>zstd</code>。</li>
+<li><strong>详细</strong>：<ul>
+<li><code>snappy</code>：由 Google 发明，占用较少的 CPU，提供较好的性能和相当可观的压缩比。</li>
+<li><code>gzip</code>：占用较多的 CPU，但会提供更高的压缩比。</li>
+</ul>
+</li>
+<li><strong>权衡</strong>：压缩会消耗客户端 CPU，但能极大降低网络传输开销和 Broker 存储开销。在生产环境中<strong>强烈推荐开启</strong>（例如 <code>snappy</code>）。</li>
+</ul>
+<h4 id="04-retries-可靠性"><a href="#04-retries-可靠性" class="headerlink" title="04. retries (可靠性)"></a>04. <code>retries</code> (可靠性)</h4><ul>
+<li><strong>解释</strong>：生产者从服务器收到的错误有可能是<strong>临时性的</strong>（比如分区找不到首领）。<code>retries</code> 参数的值决定了生产者可以重发消息的次数。</li>
+<li><strong>详细</strong>：默认值很大 (2147483647)，配合 <code>delivery.timeout.ms</code> (默认 2 分钟) 来控制总重试时间。</li>
+<li><strong>陷阱</strong>：重试可能导致<strong>消息重复</strong>和<strong>消息乱序</strong>。<ul>
+<li><strong>重复</strong>：生产者发送消息 A，Leader 收到并写入，但在响应生产者之前宕机了。生产者认为失败，重试，新 Leader 再次写入消息 A，导致重复。</li>
+<li><strong>乱序</strong>：生产者发送消息 A (失败)、B (成功)、A (重试成功)。最终顺序变为 B, A。</li>
+<li><strong>解决方案</strong>：设置 <code>enable.idempotence=true</code> (幂等生产者)，可解决重复和乱序问题（要求 <code>acks=all</code> 且 <code>retries &gt; 0</code>）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="05-batch-size-吞吐量"><a href="#05-batch-size-吞吐量" class="headerlink" title="05. batch.size (吞吐量)"></a>05. <code>batch.size</code> (吞吐量)</h4><ul>
+<li><strong>解释</strong>：当有多个消息需要被发送到同一个分区时，生产者会把它们放在同一个批次里。该参数指定了一个批次可以使用的内存大小（字节数）。</li>
+<li><strong>详细</strong>：默认 16KB。批次被填满后，消息会被发送。<strong>但生产者不一定都会等到批次被填满</strong>。</li>
+</ul>
+<h4 id="06-linger-ms-延迟"><a href="#06-linger-ms-延迟" class="headerlink" title="06. linger.ms (延迟)"></a>06. <code>linger.ms</code> (延迟)</h4><ul>
+<li><strong>解释</strong>：该参数指定了生产者在发送批次之前<strong>等待更多消息加入批次的时间</strong>。</li>
+<li><strong>详细</strong>：默认 0ms。这意味着只要有可用的线程，生产者就会<strong>立即</strong>把消息发送出去，即使批次里只有一个消息。</li>
+<li><strong>调优</strong>：<code>batch.size</code> 和 <code>linger.ms</code> 是提升吞吐量的关键。<ul>
+<li>将 <code>linger.ms</code> 设置成一个大于 0 的数（例如 5ms 或 20ms），可以<strong>以微小的延迟为代价，极大地提升吞吐量</strong>。</li>
+<li>这使得生产者有时间“稍等片刻”，收集更多的消息组成一个大批次 (Batch)，从而减少了网络请求次数，提高了效率。</li>
+</ul>
+</li>
+</ul>
+<h4 id="07-client-id"><a href="#07-client-id" class="headerlink" title="07. client.id"></a>07. <code>client.id</code></h4><ul>
+<li><strong>解释</strong>：任意的字符串，服务器会用它来识别消息的来源，用在日志、监控和配额指标里。建议设置成有意义的名称（如 “payment-service-producer”）。</li>
+</ul>
+<h4 id="08-max-in-flight-requests-per-connection"><a href="#08-max-in-flight-requests-per-connection" class="headerlink" title="08. max.in.flight.requests.per.connection"></a>08. <code>max.in.flight.requests.per.connection</code></h4><ul>
+<li><strong>解释</strong>：生产者在收到服务器响应之前可以发送多少个消息（批次）。</li>
+<li><strong>详细</strong>：默认 5。如果设为 1，可以<strong>保证消息是按照发送的顺序写入服务器的</strong>（即使发生重试），但会严重影响吞吐量。</li>
+<li><strong>注意</strong>：启用幂等性 (<code>enable.idempotence=true</code>) 时，此值必须小于等于 5，并且能自动保证顺序。</li>
+</ul>
+<h4 id="09-max-request-size"><a href="#09-max-request-size" class="headerlink" title="09. max.request.size"></a>09. <code>max.request.size</code></h4><ul>
+<li><strong>解释</strong>：控制生产者发送的请求大小，即单个批次的总大小。默认 1MB。</li>
+<li><strong>注意</strong>：Broker 端也有一个 <code>message.max.bytes</code> (默认 1MB) 的配置。生产者的这个值不能大于 Broker 的值，否则消息将被拒绝。</li>
+</ul>
+<hr>
+<h2 id="第六部分：深入-Kafka-消费者-Consumer"><a href="#第六部分：深入-Kafka-消费者-Consumer" class="headerlink" title="第六部分：深入 Kafka 消费者 (Consumer)"></a>第六部分：深入 Kafka 消费者 (Consumer)</h2><p>您已经使用 <code>kafka-console-consumer.sh</code> 成功接收了消息。但真实的消费者要复杂得多，它需要处理<strong>消费者组、分区再均衡、偏移量提交</strong>等。</p>
+<p>您提供的“<strong>第 4 章 知识</strong>”为我们提供了深入理解的基础。</p>
+<h3 id="4-2-创建-Kafka-消费者-程序中"><a href="#4-2-创建-Kafka-消费者-程序中" class="headerlink" title="4.2 创建 Kafka 消费者 (程序中)"></a>4.2 创建 Kafka 消费者 (程序中)</h3><p>创建消费者同样需要一个 <code>Properties</code> 对象，有 4 个关键属性。</p>
+<ol>
+<li><p><code>bootstrap.servers</code></p>
+<ul>
+<li><strong>解释</strong>：与生产者一样，指向 <code>localhost:9092</code>。</li>
+</ul>
+</li>
+<li><p><code>key.deserializer</code></p>
+<ul>
+<li><strong>解释</strong>：键（Key）的反序列化器。</li>
+<li><strong>详细</strong>：必须与生产者 <code>key.serializer</code> <strong>配对使用</strong>。如果生产者用 <code>StringSerializer</code>，消费者必须用 <code>StringDeserializer</code>。</li>
+</ul>
+</li>
+<li><p><code>value.deserializer</code></p>
+<ul>
+<li><strong>解释</strong>：值（Value）的反序列化器。</li>
+<li><strong>详细</strong>：必须与生产者 <code>value.serializer</code> 配对使用。</li>
+</ul>
+</li>
+<li><p><code>group.id</code></p>
+<ul>
+<li><strong>解释</strong>：<strong>消费者最重要的配置</strong>。它指定了 KafkaConsumer 属于哪一个消费者群组。</li>
+<li><strong>详细</strong>：<ul>
+<li>同一个 <code>group.id</code> 下的所有消费者，会<strong>分摊</strong>它们所订阅的 Topic 的所有分区。</li>
+<li>一个分区<strong>最多</strong>只能被<strong>一个</strong>组内的消费者消费。</li>
+<li>如果 <code>group.id</code> 不同，那么它们是两个独立的组，会<strong>各自收到一份完整的消息</strong>（实现了“发布-订阅”模式）。</li>
+<li>如果 <code>group.id</code> 相同，它们是一个组，会<strong>分担消息处理</strong>（实现了“工作队列”模式）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="4-3-订阅主题"><a href="#4-3-订阅主题" class="headerlink" title="4.3 订阅主题"></a>4.3 订阅主题</h3><ul>
+<li><p><code>consumer.subscribe(Collections.singletonList(&quot;test&quot;));</code></p>
+<ul>
+<li><strong>解释</strong>：订阅一个或多个固定的主题。</li>
+</ul>
+</li>
+<li><p><code>consumer.subscribe(&quot;test.*&quot;);</code></p>
+<ul>
+<li><strong>解释</strong>：使用正则表达式订阅所有与 <code>test</code> 相关的主题。如果集群中新增了一个 <code>test-new</code> 主题，消费者会自动发现并开始消费。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-5-消费者的关键配置详解"><a href="#4-5-消费者的关键配置详解" class="headerlink" title="4.5 消费者的关键配置详解"></a>4.5 消费者的关键配置详解</h3><p>以下是您提供的知识库中，对消费者<strong>性能、可用性、消息语义</strong>影响最大的参数。</p>
+<h4 id="01-fetch-min-bytes-网络效率"><a href="#01-fetch-min-bytes-网络效率" class="headerlink" title="01. fetch.min.bytes (网络效率)"></a>01. <code>fetch.min.bytes</code> (网络效率)</h4><ul>
+<li><strong>解释</strong>：该属性指定了消费者从服务器获取记录的<strong>最小</strong>字节数。默认 1 字节。</li>
+<li><strong>详细</strong>：Broker 在收到消费者的数据请求时，如果可用的数据量小于此值，那么它会<strong>等待</strong>，直到有足够的可用数据时才返回给消费者（参见下一个参数）。</li>
+<li><strong>调优</strong>：如果 Topic 不活跃，消费者会频繁地拉取空数据，浪费 CPU 和网络。<strong>适当调高此值</strong>（例如 1KB 或更高）可以降低消费者和 Broker 的负载，实现高效的“长轮询”。</li>
+</ul>
+<h4 id="02-fetch-max-wait-ms-延迟"><a href="#02-fetch-max-wait-ms-延迟" class="headerlink" title="02. fetch.max.wait.ms (延迟)"></a>02. <code>fetch.max.wait.ms</code> (延迟)</h4><ul>
+<li><strong>解释</strong>：与 <code>fetch.min.bytes</code> 配合使用。指定 Broker 的最大等待时间，默认 500ms。</li>
+<li><strong>详细</strong>：Kafka 在收到消费者的请求后，要么<strong>返回 <code>fetch.min.bytes</code> 大小的数据</strong>，要么在<strong>等待 <code>fetch.max.wait.ms</code> 毫秒后</strong>返回所有可用的数据，<strong>看哪个条件先满足</strong>。</li>
+<li><strong>权衡</strong>：<code>fetch.min.bytes</code> 和 <code>fetch.max.wait.ms</code> 共同定义了长轮询。增加 <code>fetch.max.wait.ms</code> 会增加延迟，但能极大降低空轮询的系统开销。</li>
+</ul>
+<h4 id="03-max-partition-fetch-bytes-内存管理"><a href="#03-max-partition-fetch-bytes-内存管理" class="headerlink" title="03. max.partition.fetch.bytes (内存管理)"></a>03. <code>max.partition.fetch.bytes</code> (内存管理)</h4><ul>
+<li><strong>解释</strong>：该属性指定了服务器从<strong>每个分区</strong>里返回给消费者的<strong>最大</strong>字节数。默认 1MB。</li>
+<li><strong>详细</strong>：如果一个消费者订阅了 10 个分区，它在一次 <code>poll()</code> 中最多可能收到 10MB 的数据。您需要确保为消费者分配了足够的内存。</li>
+</ul>
+<h4 id="04-session-timeout-ms-可用性-关键"><a href="#04-session-timeout-ms-可用性-关键" class="headerlink" title="04. session.timeout.ms (可用性 - 关键)"></a>04. <code>session.timeout.ms</code> (可用性 - 关键)</h4><ul>
+<li><strong>解释</strong>：该属性指定了消费者在被认为死亡之前可以与服务器断开连接的时间，默认 45 秒 (新版)。</li>
+<li><strong>详细</strong>：如果消费者没有在 <code>session.timeout.ms</code> 指定的时间内发送<strong>心跳 (Heartbeat)给群组协调器，协调器就认为它已经死亡</strong>，会触发<strong>再均衡 (Rebalance)</strong>，把它负责的分区分配给群组里的其他消费者。</li>
+</ul>
+<h4 id="heartbeat-interval-ms-可用性-关键"><a href="#heartbeat-interval-ms-可用性-关键" class="headerlink" title="heartbeat.interval.ms (可用性 - 关键)"></a><code>heartbeat.interval.ms</code> (可用性 - 关键)</h4><ul>
+<li><strong>解释</strong>：该属性指定了 <code>poll()</code> 方法向协调器发送心跳的频率，默认 3 秒。</li>
+<li><strong>规则</strong>：<code>heartbeat.interval.ms</code> <strong>必须</strong>比 <code>session.timeout.ms</code> 小，一般是 <code>session.timeout.ms</code> 的三分之一。</li>
+<li><strong>陷阱</strong>：如果消费者处理单条消息（或一批消息）的<strong>时间过长</strong>，超过了 <code>session.timeout.ms</code>，它将无法发送心跳，导致被误判为“死亡”，引发不必要的再均衡。</li>
+<li><strong>解决方案</strong>：<ol>
+<li>延长 <code>session.timeout.ms</code>。</li>
+<li>缩短消息处理时间（例如使用异步处理）。</li>
+<li>减小 <code>max.poll.records</code>（见下）。</li>
+</ol>
+</li>
+</ul>
+<h4 id="05-auto-offset-reset-新消费者-关键"><a href="#05-auto-offset-reset-新消费者-关键" class="headerlink" title="05. auto.offset.reset (新消费者 - 关键)"></a>05. <code>auto.offset.reset</code> (新消费者 - 关键)</h4><ul>
+<li><strong>解释</strong>：该属性指定了消费者在一个<strong>新的 <code>group.id</code></strong>（即没有历史偏移量记录）或者<strong>偏移量无效</strong>（例如数据已被删除）的情况下，该作何处理。</li>
+<li><code>latest</code> (默认值)：消费者将从<strong>最新的记录</strong>开始读取数据（即在消费者启动<strong>之后</strong>生成的记录）。</li>
+<li><code>earliest</code>：消费者将从<strong>起始位置</strong>（偏移量 0）读取分区的<strong>所有</strong>记录。</li>
+<li><strong>常见问题</strong>：“为什么我的消费者启动了却收不到消息？”—— 答案多半是因为你是用 <code>latest</code> 启动的，而启动后又没有新消息写入。</li>
+</ul>
+<h4 id="06-enable-auto-commit-消息语义-关键"><a href="#06-enable-auto-commit-消息语义-关键" class="headerlink" title="06. enable.auto.commit (消息语义 - 关键)"></a>06. <code>enable.auto.commit</code> (消息语义 - 关键)</h4><ul>
+<li><p><strong>解释</strong>：指定了消费者是否<strong>自动</strong>提交偏移量，默认值是 <code>true</code>。</p>
+</li>
+<li><p><strong>详细</strong>：如果为 <code>true</code>，消费者会根据 <code>auto.commit.interval.ms</code>（默认 5 秒）的频率，在后台自动提交 <code>poll()</code> 方法返回的最高偏移量。</p>
+</li>
+<li><p><strong>自动提交的陷阱 (At-Most-Once - 至多一次)</strong>：</p>
+<ol>
+<li>消费者 <code>poll()</code> 了一批消息。</li>
+<li>后台自动提交了偏移量。</li>
+<li>消费者在<strong>处理这批消息的<br>过程中</strong>崩溃了。</li>
+<li>消费者重启后，从<strong>已提交</strong>的偏移量开始，导致<strong>丢失了</strong>上一批未处理完的消息。</li>
+</ol>
+</li>
+<li><p><strong>推荐做法</strong>：</p>
+<ul>
+<li><code>enable.auto.commit = false</code></li>
+<li><strong>手动提交偏移量</strong>。在您的代码中，当消息<strong>真正处理完毕</strong>后（例如写入数据库成功后），再调用 <code>consumer.commitSync()</code> 或 <code>consumer.commitAsync()</code> 来手动提交偏移量。</li>
+<li>这实现了 <strong>At-Least-Once (至少一次)</strong> 的语义，是生产环境中最常见的做法。</li>
+</ul>
+</li>
+</ul>
+<h4 id="07-partition-assignment-strategy"><a href="#07-partition-assignment-strategy" class="headerlink" title="07. partition.assignment.strategy"></a>07. <code>partition.assignment.strategy</code></h4><ul>
+<li><strong>解释</strong>：当消费者组内的成员发生变化时（加入、退出、崩溃），决定如何将分区分配给消费者的策略。</li>
+<li><code>Range</code> (默认)：该策略会把主题的若干个<strong>连续</strong>的分区分配给消费者。</li>
+<li><code>RoundRobin</code>：该策略把主题的所有分区<strong>逐个</strong>分配给消费者。</li>
+</ul>
+<h4 id="08-max-poll-records"><a href="#08-max-poll-records" class="headerlink" title="08. max.poll.records"></a>08. <code>max.poll.records</code></h4><ul>
+<li><strong>解释</strong>：该属性用于控制单次调用 <code>poll()</code> 方法能够返回的<strong>最大记录数量</strong>。</li>
+<li><strong>调优</strong>：如果您的消息处理很慢（例如 <code>session.timeout.ms</code> 很容易超时），可以<strong>调低此值</strong>（例如 50 或 100），确保您可以在超时时间内处理完这一小批数据。</li>
+</ul>
+<hr>
+<h2 id="第七部分：结论与生产环境考量"><a href="#第七部分：结论与生产环境考量" class="headerlink" title="第七部分：结论与生产环境考量"></a>第七部分：结论与生产环境考量</h2><p>您已成功搭建了一个单机版的 Kafka 环境，并深入学习了 Zookeeper、Kafka Broker、生产者和消费者的核心配置。</p>
+<p><strong>关于 Zookeeper 集群（Ensemble）：</strong><br>您提供的教程中最后一部分关于 ZK 集群的说明非常重要：</p>
+<blockquote>
+<p>在生产环境中，<strong>绝不能</strong>使用单点 Zookeeper，因为它会成为整个系统的单点故障。您需要搭建一个由奇数个节点（通常是 3 个或 5 个）组成的 Zookeeper 集群（官方称为 Ensemble），以保证高可用性。</p>
+</blockquote>
+<p><strong>后续步骤：</strong></p>
+<ol>
+<li><strong>练习</strong>：尝试使用 Java (或您熟悉的语言) 编写一个生产者和消费者，并实践“第五部分”和“第六部分”中的配置参数（尤其是 <code>acks</code>, <code>linger.ms</code>, <code>enable.auto.commit=false</code>）。</li>
+<li><strong>集群化</strong>：尝试在一个 3 节点的集群上重复此过程，搭建一个 3 节点的 ZK 集群和 3 节点的 Kafka 集群。</li>
+<li><strong>探索 KRaft</strong>：当您熟悉了 ZK 模式后，可以开始探索 Kafka 最新的 KRaft 模式，它将是未来的标准。</li>
+</ol>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/qdblog/2026/01/28/CentOS%208%20%E4%B8%8A%E9%85%8D%E7%BD%AE%20OpenSSH%20%E6%9C%8D%E5%8A%A1%E5%99%A8/">CentOS 8 上配置 OpenSSH 服务器 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" onClick="tocControl.change()" title="文章目录"><span class="tocBtnIconBar"></span><span class="tocBtnIconBar"></span><span class="tocBtnIconBar"></span></a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a><a onclick="BgmControl()"><svg id="bgm-control" viewBox="0 0 30 34" fill="#18d1ff" style="width: 24px; transition: transform .3s;margin-top: 4px"><path d="M25.998 23.422V11.29h3.999v12.132h-3.999zM19.497 6.234h4.001v22.243h-4.001V6.234zM12.998.867h4v32.978h-4V.867zm-6.5 5.367h4.001v22.243H6.498V6.234zm-6.5 5.056h4v12.132h-4V11.29z"></path></svg><audio id="bgm" src="/audio/bgm.mp3" autoplay loop crossorigin="anonymous"> </audio></a></div></div></article><aside><div id="about"><a href="/qdblog/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">七斗</a></h1><div id="description"><p>————星球的诞生是自组织。</p></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%9A%E6%A0%B8%E5%BF%83%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%EF%BC%88The-%E2%80%9CWhy%E2%80%9D%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">第一部分：核心前置知识（The “Why”）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%83%8C%E6%99%AF%EF%BC%9A%E4%B8%BA%E4%BD%95-Kafka-%E4%BB%8D%EF%BC%88%E6%9A%82%E6%97%B6%EF%BC%89%E9%9C%80%E8%A6%81-Zookeeper%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 背景：为何 Kafka 仍（暂时）需要 Zookeeper？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-Kafka-%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E9%80%9F%E8%A7%88"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 Kafka 核心概念速览</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E6%A0%B8%E5%BF%83%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%BA%8F%E5%88%97%E5%8C%96-Serialization"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 核心前置知识：序列化 (Serialization)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%BA%8F%E5%88%97%E5%8C%96%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F-What-is-Serialization"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. 序列化到底是什么？ (What is Serialization?)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88-Kafka-%E5%BC%BA%E5%88%B6%E8%A6%81%E6%B1%82%E4%BD%BF%E7%94%A8%E5%BA%8F%E5%88%97%E5%8C%96%E5%99%A8%EF%BC%9F"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. 为什么 Kafka 强制要求使用序列化器？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Kafka-%E5%86%85%E7%BD%AE%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%99%A8%E5%8F%8A%E5%85%B6%E5%B1%80%E9%99%90%E6%80%A7"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. Kafka 内置的序列化器及其局限性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%8E%A8%E8%8D%90%E6%96%B9%E6%A1%88%EF%BC%9A%E4%BD%BF%E7%94%A8-Avro-%E5%92%8C-Schema-Registry"><span class="toc-number">1.3.4.</span> <span class="toc-text">4. 推荐方案：使用 Avro 和 Schema Registry</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%EF%BC%9A%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE-Zookeeper-3-8-x"><span class="toc-number">2.</span> <span class="toc-text">第二部分：安装和配置 Zookeeper (3.8.x)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC-1-%E6%AD%A5%EF%BC%9A%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C-%E5%AE%89%E8%A3%85%E5%BF%85%E8%A6%81%E5%B7%A5%E5%85%B7"><span class="toc-number">2.1.</span> <span class="toc-text">第 1 步：准备工作 - 安装必要工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC-2-%E6%AD%A5%EF%BC%9A%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE-Java-%E7%8E%AF%E5%A2%83-%E5%85%B3%E9%94%AE%E4%BE%9D%E8%B5%96"><span class="toc-number">2.2.</span> <span class="toc-text">第 2 步：安装和配置 Java 环境 (关键依赖)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC-3-%E6%AD%A5%EF%BC%9A%E4%B8%8B%E8%BD%BD%E5%B9%B6%E8%A7%A3%E5%8E%8B-Zookeeper"><span class="toc-number">2.3.</span> <span class="toc-text">第 3 步：下载并解压 Zookeeper</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC-4-%E6%AD%A5%EF%BC%9A%E5%AE%89%E8%A3%85-Zookeeper-%E5%B9%B6%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E7%9B%AE%E5%BD%95"><span class="toc-number">2.4.</span> <span class="toc-text">第 4 步：安装 Zookeeper 并创建数据目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC-5-%E6%AD%A5%EF%BC%9A%E9%85%8D%E7%BD%AE-Zookeeper-zoo-cfg"><span class="toc-number">2.5.</span> <span class="toc-text">第 5 步：配置 Zookeeper (zoo.cfg)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC-6-%E6%AD%A5%EF%BC%9A%E8%A7%A3%E5%86%B3%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98%E5%B9%B6%E5%90%AF%E5%8A%A8-Zookeeper"><span class="toc-number">2.6.</span> <span class="toc-text">第 6 步：解决权限问题并启动 Zookeeper</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC-7-%E6%AD%A5%EF%BC%9A%E9%AA%8C%E8%AF%81-Zookeeper-%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.7.</span> <span class="toc-text">第 7 步：验证 Zookeeper 服务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86%EF%BC%9A%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE-Kafka"><span class="toc-number">3.</span> <span class="toc-text">第三部分：安装和配置 Kafka</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC-1-%E6%AD%A5%EF%BC%9A%E4%B8%8B%E8%BD%BD%E5%B9%B6%E8%A7%A3%E5%8E%8B-Kafka"><span class="toc-number">3.1.</span> <span class="toc-text">第 1 步：下载并解压 Kafka</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC-2-%E6%AD%A5%EF%BC%9A%E5%AE%89%E8%A3%85-Kafka"><span class="toc-number">3.2.</span> <span class="toc-text">第 2 步：安装 Kafka</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC-3-%E6%AD%A5%EF%BC%9A%E9%85%8D%E7%BD%AE-Kafka-server-properties"><span class="toc-number">3.3.</span> <span class="toc-text">第 3 步：配置 Kafka (server.properties)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC-4-%E6%AD%A5%EF%BC%9A%E5%88%9B%E5%BB%BA-Kafka-%E6%97%A5%E5%BF%97%E7%9B%AE%E5%BD%95"><span class="toc-number">3.4.</span> <span class="toc-text">第 4 步：创建 Kafka 日志目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC-5-%E6%AD%A5%EF%BC%9A%E5%90%AF%E5%8A%A8-Kafka-%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">3.5.</span> <span class="toc-text">第 5 步：启动 Kafka 服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC-6-%E6%AD%A5%EF%BC%9A%E9%AA%8C%E8%AF%81-Kafka-%E6%9C%8D%E5%8A%A1"><span class="toc-number">3.6.</span> <span class="toc-text">第 6 步：验证 Kafka 服务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E9%83%A8%E5%88%86%EF%BC%9AKafka-%E6%A0%B8%E5%BF%83%E6%93%8D%E4%BD%9C-%E4%BD%BF%E7%94%A8%E6%96%B0%E7%89%88%E5%91%BD%E4%BB%A4"><span class="toc-number">4.</span> <span class="toc-text">第四部分：Kafka 核心操作 (使用新版命令)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E5%B9%B6%E9%AA%8C%E8%AF%81%E4%B8%BB%E9%A2%98-Topic"><span class="toc-number">4.1.</span> <span class="toc-text">1. 创建并验证主题 (Topic)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8F%91%E5%B8%83%E6%B6%88%E6%81%AF-Produce"><span class="toc-number">4.2.</span> <span class="toc-text">2. 发布消息 (Produce)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%AF%BB%E5%8F%96%E6%B6%88%E6%81%AF-Consume"><span class="toc-number">4.3.</span> <span class="toc-text">3. 读取消息 (Consume)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E9%83%A8%E5%88%86%EF%BC%9A%E6%B7%B1%E5%85%A5-Kafka-%E7%94%9F%E4%BA%A7%E8%80%85-Producer"><span class="toc-number">5.</span> <span class="toc-text">第五部分：深入 Kafka 生产者 (Producer)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%88%9B%E5%BB%BA-Kafka-%E7%94%9F%E4%BA%A7%E8%80%85-%E7%A8%8B%E5%BA%8F%E4%B8%AD"><span class="toc-number">5.1.</span> <span class="toc-text">3.2 创建 Kafka 生产者 (程序中)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E7%94%9F%E4%BA%A7%E8%80%85%E7%9A%84%E5%85%B3%E9%94%AE%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3"><span class="toc-number">5.2.</span> <span class="toc-text">3.4 生产者的关键配置详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#01-acks-%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E6%80%A7"><span class="toc-number">5.2.1.</span> <span class="toc-text">01. acks (数据持久性)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#02-buffer-memory-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-number">5.2.2.</span> <span class="toc-text">02. buffer.memory (内存管理)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#03-compression-type-%E7%BD%91%E7%BB%9C%E6%95%88%E7%8E%87"><span class="toc-number">5.2.3.</span> <span class="toc-text">03. compression.type (网络效率)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#04-retries-%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="toc-number">5.2.4.</span> <span class="toc-text">04. retries (可靠性)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#05-batch-size-%E5%90%9E%E5%90%90%E9%87%8F"><span class="toc-number">5.2.5.</span> <span class="toc-text">05. batch.size (吞吐量)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#06-linger-ms-%E5%BB%B6%E8%BF%9F"><span class="toc-number">5.2.6.</span> <span class="toc-text">06. linger.ms (延迟)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#07-client-id"><span class="toc-number">5.2.7.</span> <span class="toc-text">07. client.id</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#08-max-in-flight-requests-per-connection"><span class="toc-number">5.2.8.</span> <span class="toc-text">08. max.in.flight.requests.per.connection</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#09-max-request-size"><span class="toc-number">5.2.9.</span> <span class="toc-text">09. max.request.size</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E9%83%A8%E5%88%86%EF%BC%9A%E6%B7%B1%E5%85%A5-Kafka-%E6%B6%88%E8%B4%B9%E8%80%85-Consumer"><span class="toc-number">6.</span> <span class="toc-text">第六部分：深入 Kafka 消费者 (Consumer)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%88%9B%E5%BB%BA-Kafka-%E6%B6%88%E8%B4%B9%E8%80%85-%E7%A8%8B%E5%BA%8F%E4%B8%AD"><span class="toc-number">6.1.</span> <span class="toc-text">4.2 创建 Kafka 消费者 (程序中)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E8%AE%A2%E9%98%85%E4%B8%BB%E9%A2%98"><span class="toc-number">6.2.</span> <span class="toc-text">4.3 订阅主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-%E6%B6%88%E8%B4%B9%E8%80%85%E7%9A%84%E5%85%B3%E9%94%AE%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3"><span class="toc-number">6.3.</span> <span class="toc-text">4.5 消费者的关键配置详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#01-fetch-min-bytes-%E7%BD%91%E7%BB%9C%E6%95%88%E7%8E%87"><span class="toc-number">6.3.1.</span> <span class="toc-text">01. fetch.min.bytes (网络效率)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#02-fetch-max-wait-ms-%E5%BB%B6%E8%BF%9F"><span class="toc-number">6.3.2.</span> <span class="toc-text">02. fetch.max.wait.ms (延迟)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#03-max-partition-fetch-bytes-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-number">6.3.3.</span> <span class="toc-text">03. max.partition.fetch.bytes (内存管理)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#04-session-timeout-ms-%E5%8F%AF%E7%94%A8%E6%80%A7-%E5%85%B3%E9%94%AE"><span class="toc-number">6.3.4.</span> <span class="toc-text">04. session.timeout.ms (可用性 - 关键)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#heartbeat-interval-ms-%E5%8F%AF%E7%94%A8%E6%80%A7-%E5%85%B3%E9%94%AE"><span class="toc-number">6.3.5.</span> <span class="toc-text">heartbeat.interval.ms (可用性 - 关键)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#05-auto-offset-reset-%E6%96%B0%E6%B6%88%E8%B4%B9%E8%80%85-%E5%85%B3%E9%94%AE"><span class="toc-number">6.3.6.</span> <span class="toc-text">05. auto.offset.reset (新消费者 - 关键)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#06-enable-auto-commit-%E6%B6%88%E6%81%AF%E8%AF%AD%E4%B9%89-%E5%85%B3%E9%94%AE"><span class="toc-number">6.3.7.</span> <span class="toc-text">06. enable.auto.commit (消息语义 - 关键)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#07-partition-assignment-strategy"><span class="toc-number">6.3.8.</span> <span class="toc-text">07. partition.assignment.strategy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#08-max-poll-records"><span class="toc-number">6.3.9.</span> <span class="toc-text">08. max.poll.records</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E9%83%A8%E5%88%86%EF%BC%9A%E7%BB%93%E8%AE%BA%E4%B8%8E%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E8%80%83%E9%87%8F"><span class="toc-number">7.</span> <span class="toc-text">第七部分：结论与生产环境考量</span></a></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>
